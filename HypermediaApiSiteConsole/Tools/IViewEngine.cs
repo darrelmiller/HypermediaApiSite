@@ -9,6 +9,5 @@ namespace HypermediaApiSiteConsole.Tools
     {
         void RenderTo<T>(T model, Stream templateStream, Stream outputStream);
         Collection<MediaTypeHeaderValue> SupportedMediaTypes { get; }
-        Stream GetTemplate(Type modelType, MediaTypeHeaderValue mediaType);
     }
 }

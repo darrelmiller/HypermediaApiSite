@@ -15,24 +15,29 @@ namespace HypermediaApiSiteConsole.Content
 {
     public class ContentController : ApiController
     {
-        private readonly IViewEngine _viewEngine;
 
-        public ContentController(IViewEngine viewEngine)
-        {
-            _viewEngine = viewEngine;
-        }
 
         public HttpResponseMessage Get(string name)
         {
             var viewStream = this.GetType().Assembly.GetManifestResourceStream(this.GetType(), name + "View.cshtml");
 
-            var content = new HtmlContent<RootModel>(_viewEngine, viewStream, new RootModel() { Site = "Hypermedia API" });
+            var view = new View(viewStream, new RootModel() {Site = "Hypermedia API"});
 
-            var response = new HttpResponseMessage() { Content = content };
-            response.Headers.CacheControl = new CacheControlHeaderValue()
-            {
-                MaxAge = new TimeSpan(1, 0, 0)
-            };
+            var content = view.CreateContent();
+            content.Headers.ContentType = new MediaTypeHeaderValue("text/html");
+
+            var response = new HttpResponseMessage
+                               {
+                                   Content = content,
+                                   Headers =
+                                       {
+                                           CacheControl = new CacheControlHeaderValue()
+                                                              {
+                                                                  MaxAge = new TimeSpan(1, 0, 0)
+                                                              }
+                                       }
+                               };
+
             return response;
         }
     }

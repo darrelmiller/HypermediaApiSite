@@ -32,16 +32,10 @@ namespace HypermediaApiSiteConsole.Tools
         }
 
 
-
         public Collection<MediaTypeHeaderValue> SupportedMediaTypes
         {
             get { return new Collection<MediaTypeHeaderValue>() {new MediaTypeHeaderValue("text/html")}; }
         }
 
-        public Stream GetTemplate(Type modelType, MediaTypeHeaderValue mediaType)
-        {
-            var templateName = modelType.Name.Replace("Model", "View") + ".cshtml";
-            return modelType.Assembly.GetManifestResourceStream(modelType,  templateName);
-        }
     }
 }

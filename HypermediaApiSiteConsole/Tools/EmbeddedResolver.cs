@@ -7,7 +7,9 @@ namespace HypermediaApiSiteConsole
     {
         public string Resolve(string name)
         {
-            var viewStream = this.GetType().Assembly.GetManifestResourceStream(typeof(RootController), "Includes." + name);
+
+            name = name.Replace("~/", "").Replace("/", ".");  //Convert "web path" to "resource path"
+            var viewStream = this.GetType().Assembly.GetManifestResourceStream(typeof(RootController), name);
 
             return new StreamReader(viewStream).ReadToEnd();
         }

@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Json;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Web.Http;
 using HypermediaApiSiteConsole.Tools;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Encoding = RazorEngine.Encoding;
 
 namespace HypermediaApiSiteConsole
@@ -19,23 +25,18 @@ namespace HypermediaApiSiteConsole
             _viewEngine = viewEngine;
         }
 
-        public HttpResponseMessage Get()
+        public View Get()
         {
             var templateStream = this.GetType().Assembly.GetManifestResourceStream(typeof (RootController), "RootView.cshtml");
             
             var siteInfo = new RootModel() {Site = "Hypermedia API"};
 
-            var content = this.Request.CreateContent<RootModel>(siteInfo);
+            return new View(templateStream,siteInfo);
 
-            return new HttpResponseMessage()
-                       {
-                           Content = content // GetHtmlContent(templateStream, siteInfo, _viewEngine)
-                       };
-            
-        
         }
 
-        private StreamContent GetHtmlContent(Stream viewStream, RootModel rootModel, IViewEngine viewEngine)
+        
+       private StreamContent GetHtmlContent(Stream viewStream, RootModel rootModel, IViewEngine viewEngine)
         {
             Stream contentStream = new MemoryStream();
 

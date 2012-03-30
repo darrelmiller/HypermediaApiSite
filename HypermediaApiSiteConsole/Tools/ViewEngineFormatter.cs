@@ -23,22 +23,27 @@ namespace HypermediaApiSiteConsole.Tools
             }
         }
 
-        protected override bool CanWriteType(Type type)
+        protected override bool CanReadType(Type type)
         {
-            return true;
+            return false;
         }
 
-        protected override System.Threading.Tasks.Task OnWriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, System.Net.TransportContext transportContext)
+        protected override bool CanWriteType(Type type)
         {
-            var template = _viewEngine.GetTemplate(type, contentHeaders.ContentType);
+            
+            return typeof(View) == type;
+        }
 
-            MethodInfo method = typeof(IViewEngine).GetMethod("RenderTo");
-            MethodInfo generic = method.MakeGenericMethod(type);
-            generic.Invoke(_viewEngine, new object[] { value, template, stream });    //_viewEngine.RenderTo(value, template, stream);
-          
+        protected override Task OnWriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, System.Net.TransportContext transportContext)
+        {
+            var view = (View)value;
+            view.WriteToStream(stream);
             var tcs = new TaskCompletionSource<Stream>();
             tcs.SetResult(stream);
             return tcs.Task;
         }
+
+        
+
     }
 }
