@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HypermediaApiSiteConsole", "HypermediaApiSiteConsole\HypermediaApiSiteConsole.csproj", "{45D2D87C-4ED3-466F-845E-A85F63FA8A75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A90B01CA-CD03-41C6-B9A1-53CBDEAE30D3}"
@@ -9,16 +9,38 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A90B01
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RazorEngine.Core", "..\RazorEngine\src\Core\RazorEngine.Core\RazorEngine.Core.csproj", "{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Debug|x86.ActiveCfg = Debug|x86
 		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Debug|x86.Build.0 = Debug|x86
+		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Release|Any CPU.ActiveCfg = Release|x86
+		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Release|Mixed Platforms.Build.0 = Release|x86
 		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Release|x86.ActiveCfg = Release|x86
 		{45D2D87C-4ED3-466F-845E-A85F63FA8A75}.Release|x86.Build.0 = Release|x86
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D268F86D-2DAB-4329-A75F-3BCF6D5BCDC4}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

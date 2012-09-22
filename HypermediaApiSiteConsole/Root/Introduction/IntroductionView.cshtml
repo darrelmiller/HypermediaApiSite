@@ -1,0 +1,12 @@
+﻿@{_Layout = "~/Includes/Master.cshtml";}
+
+<h2>Introduction</h2>
+<p>@Model.Definition</p>
+
+
+<h2>Usages</h2>
+
+<ul>
+@foreach (var infoNode in @Model.Usages)
+{<li><a href="@infoNode.Link.Target.OriginalString">@infoNode.Link.Title</a><p>@infoNode.Description</p></li>}
+</ul>

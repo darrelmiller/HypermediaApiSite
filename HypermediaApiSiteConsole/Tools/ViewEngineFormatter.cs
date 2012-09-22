@@ -4,6 +4,8 @@ using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading.Tasks;
+using HypermediaApiSiteConsole.ViewEngine;
+using System.Linq;
 
 namespace HypermediaApiSiteConsole.Tools
 {
@@ -23,25 +25,38 @@ namespace HypermediaApiSiteConsole.Tools
             }
         }
 
-        protected override bool CanReadType(Type type)
+        public override bool CanReadType(Type type)
         {
+            
             return false;
         }
 
-        protected override bool CanWriteType(Type type)
+        public override bool CanWriteType(Type type)
         {
             
-            return typeof(View) == type;
+            return typeof(View) == type || type.GetInterfaces().Contains(typeof(IViewEngineView));
         }
 
-        protected override Task OnWriteToStreamAsync(Type type, object value, Stream stream, HttpContentHeaders contentHeaders, FormatterContext formatterContext, System.Net.TransportContext transportContext)
+        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, System.Net.Http.HttpContent content, System.Net.TransportContext transportContext)
         {
-            var view = (View)value;
-            view.WriteToStream(stream);
+            var viewmodel = value as IViewEngineView;
+            View view;
+            if (viewmodel != null)
+            {
+                view = viewmodel.CreateView();
+            }
+            else
+            {
+                view = (View) value;
+            }
+
+            view.WriteToStream(writeStream);
             var tcs = new TaskCompletionSource<Stream>();
-            tcs.SetResult(stream);
+            tcs.SetResult(writeStream);
             return tcs.Task;
         }
+
+       
 
         
 

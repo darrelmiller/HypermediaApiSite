@@ -24,7 +24,7 @@ namespace HypermediaApiSiteConsole.Tools
         public void RenderTo<T>(T model, Stream templateStream, Stream outputStream)
         {
             string template = new StreamReader(templateStream).ReadToEnd();
-            string result = Razor.Parse<T>(template, model);
+            string result = Razor.Parse(template, model);
             var sw = new StreamWriter(outputStream);
          
             sw.Write(result);

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using HypermediaApiSiteConsole.Root;
 using RazorEngine.Templating;
 
 namespace HypermediaApiSiteConsole
@@ -9,7 +10,7 @@ namespace HypermediaApiSiteConsole
         {
 
             name = name.Replace("~/", "").Replace("/", ".");  //Convert "web path" to "resource path"
-            var viewStream = this.GetType().Assembly.GetManifestResourceStream(typeof(RootController), name);
+            var viewStream = this.GetType().Assembly.GetManifestResourceStream("HypermediaApiSiteConsole."+name);
 
             return new StreamReader(viewStream).ReadToEnd();
         }

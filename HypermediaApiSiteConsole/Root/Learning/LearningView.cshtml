@@ -1,0 +1,23 @@
+﻿
+@{_Layout = "~/Includes/Master.cshtml";}
+
+<h2>Learning
+</h2>
+
+<h3>Videos</h3>
+<ul>
+@foreach (var link in @Model.Videos)
+{<li><a href="@link.Target.OriginalString">@link.Title</a></li>}
+</ul>
+<h3>Community</h3>
+<ul>
+@foreach (var infoNode in @Model.Community)
+{<li><a href="@infoNode.Link.Target.OriginalString">@infoNode.Link.Title</a><p>@infoNode.Description</p></li>}
+</ul>
+<h3>Articles</h3>
+
+<h3>Books</h3>
+
+<iframe src="http://rcm-ca.amazon.ca/e/cm?t=hyap-20&o=15&p=8&l=as1&asins=1449306578&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=FFFFFF&bg1=FFFFFF&npa=1&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+<iframe src="http://rcm-ca.amazon.ca/e/cm?t=hyap-20&o=15&p=8&l=as1&asins=0596805829&ref=tf_til&fc1=000000&IS2=1&lt1=_blank&m=amazon&lc1=0000FF&bc1=FFFFFF&bg1=FFFFFF&npa=1&f=ifr" style="width:120px;height:240px;" scrolling="no" marginwidth="0" marginheight="0" frameborder="0"></iframe>
+<span style="width: 120px;height:240px;vertical-align: top;"><a href="http://designinghypermediaapis.com/" style="vertical-align: top;">Designing Hypermedia APIs - Steve Klabnik</a></span>

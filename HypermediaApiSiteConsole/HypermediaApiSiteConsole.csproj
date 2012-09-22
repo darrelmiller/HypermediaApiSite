@@ -46,35 +46,31 @@
     <Reference Include="Microsoft.Practices.Unity.Configuration">
       <HintPath>..\packages\Unity.2.1.505.0\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RazorEngine, Version=3.0.8.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\System.Json.4.0.20126.16343\lib\net40\System.Json.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Management" />
     <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.Formatting.4.0.20126.16343\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\AspNetWebApi.Core.4.0.20126.16343\lib\net40\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.Common, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Web.Http.Common.4.0.20126.16343\lib\net40\System.Web.Http.Common.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.SelfHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\AspNetWebApi.SelfHost.4.0.20126.16343\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.SelfHost.4.0.20710.0\lib\net40\System.Web.Http.SelfHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -85,32 +81,99 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tavis.Link">
+      <HintPath>..\packages\Tavis.Link.0.1.9\lib\net40\Tavis.Link.dll</HintPath>
+    </Reference>
+    <Reference Include="Tavis.UriTemplates">
+      <HintPath>..\packages\Tavis.UriTemplates.0.1.1\lib\NET40\Tavis.UriTemplates.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Content\ContentController.cs" />
+    <Compile Include="HypermediaApiConfiguration.cs" />
+    <Compile Include="HypermediaApiConsole.cs" />
+    <Compile Include="Tools\ApiControllerExtensions.cs" />
+    <Compile Include="HypermediaApiService.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HypermediaApiService.Designer.cs">
+      <DependentUpon>HypermediaApiService.cs</DependentUpon>
+    </Compile>
+    <Compile Include="js\JavascriptController.cs" />
+    <Compile Include="Root\About\AboutController.cs" />
+    <Compile Include="Root\About\AboutModel.cs" />
+    <Compile Include="Root\Introduction\IntroductionController.cs" />
+    <Compile Include="Root\Introduction\IntroductionModel.cs" />
+    <Compile Include="Root\Learning\LearningController.cs" />
+    <Compile Include="Root\Learning\LearningViewModel.cs" />
+    <Compile Include="Root\Toolkits\ToolkitsController.cs" />
+    <Compile Include="Root\Toolkits\ToolkitsModel.cs" />
     <Compile Include="Tools\EmbeddedResolver.cs" />
+    <Compile Include="Tools\IPlainTextView.cs" />
+    <Compile Include="Tools\IViewEngineView.cs" />
     <Compile Include="Tools\IViewEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\PlainTextFormatter.cs" />
     <Compile Include="Tools\RazorViewEngine.cs" />
-    <Compile Include="RootController.cs" />
-    <Compile Include="RootModel.cs" />
-    <Compile Include="Stylesheets\StylesheetsController.cs" />
+    <Compile Include="Root\HomeController.cs" />
+    <Compile Include="Root\HomeModel.cs" />
+    <Compile Include="css\StylesheetsController.cs" />
     <Compile Include="Tools\View.cs" />
     <Compile Include="Tools\ViewEngineFormatter.cs" />
+    <Compile Include="Tools\W3CLogger.cs" />
+    <Compile Include="Tools\UnityResolver.cs" />
+    <Compile Include="Tools\WebApiOutputCacheAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <EmbeddedResource Include="Includes\Master.cshtml" />
-    <EmbeddedResource Include="Content\AboutView.cshtml" />
+    <EmbeddedResource Include="Root\About\AboutView.cshtml" />
+    <EmbeddedResource Include="Root\Introduction\IntroductionView.cshtml" />
+    <EmbeddedResource Include="Root\Learning\LearningView.cshtml" />
+    <EmbeddedResource Include="Root\Toolkits\ToolkitsView.cshtml" />
+    <None Include="Install.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
-    <EmbeddedResource Include="RootView.cshtml" />
+    <EmbeddedResource Include="Root\HomeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Stylesheets\Site.css" />
+    <EmbeddedResource Include="js\bootstrap-affix.js" />
+    <EmbeddedResource Include="js\bootstrap-alert.js" />
+    <EmbeddedResource Include="js\bootstrap-button.js" />
+    <EmbeddedResource Include="js\bootstrap-carousel.js" />
+    <EmbeddedResource Include="js\bootstrap-collapse.js" />
+    <EmbeddedResource Include="js\bootstrap-dropdown.js" />
+    <EmbeddedResource Include="js\bootstrap-modal.js" />
+    <EmbeddedResource Include="js\bootstrap-popover.js" />
+    <EmbeddedResource Include="js\bootstrap-scrollspy.js" />
+    <EmbeddedResource Include="js\bootstrap-tab.js" />
+    <EmbeddedResource Include="js\bootstrap-tooltip.js" />
+    <EmbeddedResource Include="js\bootstrap-transition.js" />
+    <EmbeddedResource Include="js\bootstrap-typeahead.js" />
+    <EmbeddedResource Include="js\jquery.js" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Images\" />
+    <EmbeddedResource Include="css\bootstrap-responsive.css" />
+    <EmbeddedResource Include="css\bootstrap-responsive.min.css" />
+    <EmbeddedResource Include="css\bootstrap.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="img\glyphicons-halflings-white.png" />
+    <EmbeddedResource Include="img\glyphicons-halflings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="js\bootstrap.js" />
+    <EmbeddedResource Include="js\bootstrap.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\RazorEngine\src\Core\RazorEngine.Core\RazorEngine.Core.csproj">
+      <Project>{d268f86d-2dab-4329-a75f-3bcf6d5bcdc4}</Project>
+      <Name>RazorEngine.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\bootstrap.min.css" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
