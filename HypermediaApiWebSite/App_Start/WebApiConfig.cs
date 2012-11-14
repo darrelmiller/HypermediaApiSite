@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
+using HypermediaApiContent;
+
+namespace HypermediaApiWebSite
+{
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            HypermediaApiConfiguration.ConfigureSite(config);
+
+
+        }
+    }
+}

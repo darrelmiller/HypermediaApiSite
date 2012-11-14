@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Http.SelfHost;
+using HypermediaApiContent;
 
 namespace HypermediaApiSiteConsole
 {
     public class HypermediaApiConsole {
-        public void Run(string baseAddress) {
+        public void Run(string baseAddress)
+        {
 
 
-
-            var config = HypermediaApiConfiguration.ConfigureSite(baseAddress);
+            var config = new HttpSelfHostConfiguration(baseAddress);
+            HypermediaApiConfiguration.ConfigureSite(config);
 
             var host = new HttpSelfHostServer(config);
            

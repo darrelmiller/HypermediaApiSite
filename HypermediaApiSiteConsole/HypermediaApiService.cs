@@ -8,6 +8,7 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Web.Http.SelfHost;
+using HypermediaApiContent;
 
 namespace HypermediaApiSiteConsole
 {
@@ -30,13 +31,15 @@ namespace HypermediaApiSiteConsole
 
                 Trace.WriteLine(String.Format("Service starting on address:  {0}", baseAddress));
 
-                var config = HypermediaApiConfiguration.ConfigureSite(baseAddress);
+                var config = new HttpSelfHostConfiguration(baseAddress);
+                HypermediaApiConfiguration.ConfigureSite(config);
 
                 _Host = new HttpSelfHostServer(config);
 
-                var sslconfig = HypermediaApiConfiguration.ConfigureSite(baseAddress.Replace("http","https"));
+                var sslConfig = new HttpSelfHostConfiguration(baseAddress.Replace("http", "https"));
+                HypermediaApiConfiguration.ConfigureSite(sslConfig);
 
-                _SSLHost = new HttpSelfHostServer(sslconfig);
+                _SSLHost = new HttpSelfHostServer(sslConfig);
 
                 _Host.OpenAsync().Wait();
                 _SSLHost.OpenAsync().Wait();
