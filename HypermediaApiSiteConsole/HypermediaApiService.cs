@@ -14,7 +14,9 @@ namespace HypermediaApiSiteConsole
     partial class HypermediaApiService : ServiceBase
     {
 
-        private HttpSelfHostServer _Host; 
+        private HttpSelfHostServer _Host;
+        private HttpSelfHostServer _SSLHost; 
+        
         public HypermediaApiService()
         {
             InitializeComponent();
@@ -32,7 +34,12 @@ namespace HypermediaApiSiteConsole
 
                 _Host = new HttpSelfHostServer(config);
 
+                var sslconfig = HypermediaApiConfiguration.ConfigureSite(baseAddress.Replace("http","https"));
+
+                _SSLHost = new HttpSelfHostServer(sslconfig);
+
                 _Host.OpenAsync().Wait();
+                _SSLHost.OpenAsync().Wait();
 
                 Trace.WriteLine("Service started");
             } catch(Exception ex)

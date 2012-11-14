@@ -1,13 +1,13 @@
 ﻿
 @{_Layout = "~/Includes/Master.cshtml";}
 
-<h2>Learning
+<h2>@Model.PageTitle
 </h2>
 
 <h3>Videos</h3>
 <ul>
-@foreach (var link in @Model.Videos)
-{<li><a href="@link.Target.OriginalString">@link.Title</a></li>}
+@foreach (var infoNode in @Model.Videos)
+{<li><a href="@infoNode.Link.Target.OriginalString">@infoNode.Link.Title</a><p>@infoNode.Description</p></li>}
 </ul>
 <h3>Community</h3>
 <ul>

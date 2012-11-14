@@ -1,79 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Http;
 using System.Text;
+using HypermediaApiSiteConsole.Model;
 using HypermediaApiSiteConsole.Tools;
 using HypermediaApiSiteConsole.ViewEngine;
+using Microsoft.Data.OData;
+using Microsoft.Data.OData.Atom;
 using Tavis;
+using System.Linq;
 
 namespace HypermediaApiSiteConsole.Root.Learning
 {
-    public class LearningViewModel : IViewEngineView, IPlainTextView
+    public class LearningViewModel : IViewEngineView, IPlainTextView, IODataView
     {
 
-        public List<Link> Videos { get; set; }
+        public string PageTitle { get; set; }
+        public List<InfoNode> Videos { get; set; }
         public List<InfoNode> Community { get; set; }
-        public List<Link> BlogPosts { get; set; }
+        public List<InfoNode> BlogPosts { get; set; }
 
-        public LearningViewModel() {
-            Videos = new List<Link>();
+        public LearningViewModel(InfoRepository infoRepository) {
+
+            PageTitle = "Learning";
+
             Community = new List<InfoNode>();
-            BlogPosts = new List<Link>();
 
-            Videos.Add(new Link() {
-                                      Target = new Uri("http://oredev.org/2010/sessions/hypermedia-apis"),
-                                      Title = "Hypermedia APIs - Jon Moore"
-                                  });
-            Videos.Add(new Link() {
-                                      Target = new Uri("http://www.infoq.com/presentations/Hypermedia-Web-Integration"),
-                                      Title = "The Role of Hypermedia and the Future of Web Integration - Guilherme Silveira"
-                                  });
-            Videos.Add(new Link() {
-                                      Target = new Uri("http://oredev.org/2010/sessions/hypermedia-apis"),
-                                      Title = "Hypermedia APIs - Jon Moore"
-                                  });
+            Videos = (from i in infoRepository.GetNodes()
+                      where i.Category == "Learning" && i.SubCategory == "Videos"
+                      select i).ToList();
 
 
-            Community.Add(new InfoNode() {
-                                             Link = new Link() {
-                                                                   Target =
-                                                                       new Uri(
-                                                                       "https://groups.google.com/forum/?fromgroups#!forum/hypermedia-web"),
-                                                                   Title = "Hypermedia Web - Google Groups"
-                                                               },
-                                             Description =
-                                                 "Mike Amundsen's list covering all things hypermedia related."
-                                         });
-            Community.Add(new InfoNode() {
-                                             Link = new Link() {
-                                                                   Target =
-                                                                       new Uri(
-                                                                       "https://groups.google.com/forum/?fromgroups#!forum/api-craft"),
-                                                                   Title = "Api-Craft - Google Groups"
-                                                               },
-                                             Description =
-                                                 "Mailing list managed by Apigee on subjects related to building and designing Web APIs."
-                                         });
+            Community = (from i in infoRepository.GetNodes()
+                      where i.Category == "Learning" && i.SubCategory == "Community"
+                      select i).ToList();
 
-            Community.Add(new InfoNode() {
-                                             Link = new Link() {
-                                                                   Target =
-                                                                       new Uri(
-                                                                       "http://tech.groups.yahoo.com/group/rest-discuss/"),
-                                                                   Title = "REST Discuss - Yahoo Groups"
-                                                               },
-                                             Description =
-                                                 "The original home of the REST community.  Not exactly friendly for newcomers but the place to go when you want to hear an authoritative answer"
-                                         });
-
-
-            Community.Add(new InfoNode() {
-                                             Link = new Link() {
-                                                                   Target = new Uri("irc://freenode.net#rest"),
-                                                                   Title = "REST IRC Channel"
-                                                               },
-                                             Description =
-                                                 "Informal and generally friendly, this is great place to bounce an idea of some knowlegable people."
-                                         });
         }
 
 
@@ -88,13 +50,55 @@ namespace HypermediaApiSiteConsole.Root.Learning
         }
 
 
+        ODataResponse IODataView.CreateView()
+        {
+            var oDataResponse = new ODataResponse();
+            var messageWriter = new ODataMessageWriter(oDataResponse);
+  
+            var entryWriter = messageWriter.CreateODataFeedWriter();
+            var feed = new ODataFeed() { Count = Videos.Count, Id = "Hypermedia-Learning" };
+            var atomFeed = feed.Atom();
+            atomFeed.Title = "Hypermedia API - " + PageTitle;
+            
+            entryWriter.WriteStart(feed);
+            foreach (var video in Videos)
+            {
+                var oDataEntry = new ODataEntry() {};
+                var atom = oDataEntry.Atom();
+                
+                atom.Title = "Video : " + video.Link.Title;
+                atom.Summary = video.Description;
+                entryWriter.WriteStart(oDataEntry);
+
+                entryWriter.WriteEnd();   
+                
+            }
+
+            foreach (var item in Community)
+            {
+                var oDataEntry = new ODataEntry() { };
+                var atom = oDataEntry.Atom();
+
+                atom.Title = "Community : " + item.Link.Title;
+                atom.Summary = item.Description;
+                entryWriter.WriteStart(oDataEntry);
+
+                entryWriter.WriteEnd();
+
+            }
+
+            entryWriter.WriteEnd();
+            entryWriter.Flush();
+            oDataResponse.GetStream().Position = 0;
+            return oDataResponse;
+        }
         string IPlainTextView.CreateView()
         {
             var sb = new StringBuilder();
             sb.AppendLine("Videos");
             foreach (var video in Videos)
             {
-                sb.AppendLine(video.Target.OriginalString);
+                sb.AppendLine(video.Link.Target.OriginalString);
             }
             sb.AppendLine("Community");
             foreach (var infoNode in Community)
@@ -110,10 +114,32 @@ namespace HypermediaApiSiteConsole.Root.Learning
         }
     }
 
-    public class InfoNode
-    {
-        public String Title { get; set; }
-        public Link Link { get; set; }
-        public string Description { get; set; }
+    public class ODataResponse : IODataResponseMessage {
+
+        private MemoryStream _Stream = new MemoryStream();
+        private Dictionary<string, string>  _Headers = new Dictionary<string, string>();
+        public ODataResponse() {
+            Headers = new Dictionary<string, string>();
+        }
+        public string GetHeader(string headerName) {
+            string value;
+            if (_Headers.TryGetValue(headerName, out value))
+            {
+                return value;
+            }
+
+            return null;
+        }
+
+        public void SetHeader(string headerName, string headerValue) {
+            ((Dictionary<string, string>) _Headers)[headerName] = headerValue;
+        }
+
+        public Stream GetStream() {
+            return _Stream;
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> Headers { get; private set; }
+        public int StatusCode { get; set; }
     }
 }

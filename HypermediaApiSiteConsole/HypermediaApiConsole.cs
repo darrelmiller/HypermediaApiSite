@@ -14,7 +14,7 @@ namespace HypermediaApiSiteConsole
             var config = HypermediaApiConfiguration.ConfigureSite(baseAddress);
 
             var host = new HttpSelfHostServer(config);
-
+           
             host.OpenAsync().Wait();
 
             Console.WriteLine("Press enter to shutdown service");

@@ -14,10 +14,10 @@ namespace HypermediaApiSiteConsole.Tools
         {
             var config = new TemplateServiceConfiguration();
             config.Resolver = new EmbeddedResolver();
+           
+            var templateService = new TemplateService(config);
 
-            var templaceService = new TemplateService(config);
-
-            Razor.SetTemplateService(templaceService);
+            Razor.SetTemplateService(templateService);
             
         }
 

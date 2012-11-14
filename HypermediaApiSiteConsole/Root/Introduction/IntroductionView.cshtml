@@ -3,6 +3,12 @@
 <h2>Introduction</h2>
 <p>@Model.Definition</p>
 
+<h2>Articles</h2>
+
+<ul>
+@foreach (var infoNode in @Model.Articles)
+{<li><a href="@infoNode.Link.Target.OriginalString">@infoNode.Link.Title</a><p>@infoNode.Description</p></li>}
+</ul>
 
 <h2>Usages</h2>
 

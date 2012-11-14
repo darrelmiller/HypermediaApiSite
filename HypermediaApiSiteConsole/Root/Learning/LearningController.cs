@@ -7,12 +7,17 @@ namespace HypermediaApiSiteConsole.Root.Learning
 {
     public class LearningController : ApiController
     {
+        private readonly InfoRepository _infoRepository;
 
-        [WebApiOutputCache(120, 60, false)]
+        public LearningController(InfoRepository infoRepository) {
+            _infoRepository = infoRepository;
+        }
+
+        [WebApiOutputCache(1, 1, false)]
         public LearningViewModel Get()
         {
         
-            return new LearningViewModel();
+            return new LearningViewModel(_infoRepository);
 
         }
     }
