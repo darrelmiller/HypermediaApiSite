@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using RazorEngine.Templating;
 
-namespace HypermediaApiSiteConsole
+namespace HypermediaApiContent.Tools
 {
     public class EmbeddedResolver : ITemplateResolver
     {
