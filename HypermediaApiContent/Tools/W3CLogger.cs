@@ -41,7 +41,7 @@ namespace HypermediaApiSiteConsole.Tools
             var request = response.RequestMessage;
             var stopwatch = (Stopwatch)request.Properties["Stopwatch"];
             stopwatch.Stop();
-            var bytes = response.Content.Headers.ContentLength;
+            var bytes = response.Content != null ? response.Content.Headers.ContentLength : 0;
             var w3clogEntry = string.Format(_LogFormat,
                                                         DateTime.Today, DateTime.Now,
                                                         GetClientIp(request),

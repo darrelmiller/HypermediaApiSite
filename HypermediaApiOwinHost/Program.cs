@@ -23,6 +23,7 @@ namespace HypermediaApiOwinHost
                     Console.WriteLine("Server running on {0}", baseAddress);
                     Console.ReadLine();
                 }
+                
             }
             else
             {

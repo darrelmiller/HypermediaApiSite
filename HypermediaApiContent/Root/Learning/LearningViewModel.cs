@@ -21,6 +21,7 @@ namespace HypermediaApiContent.Root.Learning
         public List<InfoNode> Videos { get; set; }
         public List<InfoNode> Community { get; set; }
         public List<InfoNode> BlogPosts { get; set; }
+        public List<InfoNode> Examples { get; set; }
 
         public LearningViewModel(InfoRepository infoRepository) {
 
@@ -36,6 +37,14 @@ namespace HypermediaApiContent.Root.Learning
             Community = (from i in infoRepository.GetNodes()
                       where i.Category == "Learning" && i.SubCategory == "Community"
                       select i).ToList();
+
+            BlogPosts = (from i in infoRepository.GetNodes()
+                         where i.Category == "Learning" && i.SubCategory == "BlogPosts"
+                         select i).ToList();
+
+            Examples = (from i in infoRepository.GetNodes()
+                         where i.Category == "Learning" && i.SubCategory == "Examples"
+                         select i).ToList();
 
         }
 

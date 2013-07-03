@@ -63,7 +63,8 @@ namespace webapi_outputcache
             {
                 if (_isCacheable(ac))
                 {
-                    _cachekey = string.Join(":", new string[] { ac.Request.RequestUri.AbsolutePath, ac.Request.Headers.Accept.FirstOrDefault().ToString() });
+
+                    _cachekey = string.Join(":", new string[] { ac.Request.RequestUri.AbsolutePath, "" });
 
                     if (WebApiCache.Contains(_cachekey))
                     {

@@ -99,6 +99,35 @@ namespace HypermediaApiContent.Model {
                     "Informal and generally friendly, this is great place to bounce an idea of some knowlegable people."
             });
 
+
+            _Nodes.Add(new InfoNode()
+            {
+                Category = "Learning",
+                SubCategory = "Examples",
+                Link = new Link()
+                {
+                    Target = new Uri("http://code.google.com/p/huddle-apis/"),
+                    Title = "Huddle Documentation"
+                },
+                Description =
+                    "Huddle is a commercial document management application that has a hypermedia focused API"
+            });
+        
+
+            _Nodes.Add(new InfoNode()
+            {
+                Category = "Learning",
+                SubCategory = "Examples",
+                Link = new Link()
+                {
+                    Target = new Uri("https://kenai.com/projects/suncloudapis/pages/Home"),
+                    Title = "Sun Cloud Documentation"
+                },
+                Description =
+                    "Sun Cloud is a REST based API for managing could based infrastructure"
+            });
+            
+            
             _Nodes.Add(new InfoNode()
             {
                 Category = "Introduction",

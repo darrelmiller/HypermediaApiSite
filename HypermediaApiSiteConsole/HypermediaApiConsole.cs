@@ -19,6 +19,8 @@ namespace HypermediaApiSiteConsole
            
             host.OpenAsync().Wait();
 
+            Console.WriteLine("Browse to " + baseAddress);
+
             Console.WriteLine("Press enter to shutdown service");
             Console.ReadLine();
 

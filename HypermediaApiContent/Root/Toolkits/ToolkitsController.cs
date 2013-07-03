@@ -5,7 +5,7 @@ using Parrot.Parser;
 using Parrot.Renderers;
 using System.Net.Http;
 using System.IO;
-using DependencyResolver = Parrot.Infrastructure.DependencyResolver;
+
 using Parrot.Renderers.Infrastructure;
 using System.Net.Http.Headers;
 using System.Text;
@@ -55,26 +55,26 @@ namespace HypermediaApiContent.Root.Toolkits
         }
     }
 
-    public class MyHost : Host {
-        public MyHost()
-            : base(new DependencyResolver())
-        {
-            InitializeRendererFactory();
-         //   DependencyResolver.Register(typeof(IPathResolver), () => new PathResolver());
-           // DependencyResolver.Register(typeof(DocumentRenderer), () => new DocumentRenderer(this));
-            DependencyResolver.Register(typeof(IModelValueProviderFactory), () => new ModelValueProviderFactory());
-        }
+//    public class MyHost : Host {
+//        public MyHost()
+//            : base(new DependencyResolver())
+//        {
+//            InitializeRendererFactory();
+//         //   DependencyResolver.Register(typeof(IPathResolver), () => new PathResolver());
+//           // DependencyResolver.Register(typeof(DocumentRenderer), () => new DocumentRenderer(this));
+//            DependencyResolver.Register(typeof(IModelValueProviderFactory), () => new ModelValueProviderFactory());
+//        }
 
-        private void InitializeRendererFactory()
-        {
-            var factory = new RendererFactory(this);
+//        private void InitializeRendererFactory()
+//        {
+//            var factory = new RendererFactory(this);
 
-           // factory.RegisterFactory("layout", new LayoutRenderer(this));
-            //factory.RegisterFactory("content", new ContentRenderer(this));
+//           // factory.RegisterFactory("layout", new LayoutRenderer(this));
+//            //factory.RegisterFactory("content", new ContentRenderer(this));
 
-            DependencyResolver.Register(typeof(IRendererFactory), () => factory);
-        }
-}
+//            DependencyResolver.Register(typeof(IRendererFactory), () => factory);
+//        }
+//}
 
    
 }
